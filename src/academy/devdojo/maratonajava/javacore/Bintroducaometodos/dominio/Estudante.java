@@ -6,4 +6,10 @@ public class Estudante {
 	public int idade;
 	public char sexo;
 	
+	public void imprime() {
+		System.out.println("-------------");
+		System.out.println(nome);
+		System.out.println(idade);
+		System.out.println(sexo);
+	}
 }
