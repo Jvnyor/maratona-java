@@ -5,7 +5,7 @@ import academy.devdojo.maratonajava.javacore.Gassociacao.dominio.Local;
 import academy.devdojo.maratonajava.javacore.Gassociacao.dominio.Professor;
 import academy.devdojo.maratonajava.javacore.Gassociacao.dominio.Seminario;
 
-public class SeminarioTest03 {
+public class AssociacaoTeste {
 	public static void main(String[] args) {
 		Local local = new Local("Recife");
 		
