@@ -17,6 +17,5 @@ public class Gerente extends Funcionario {
 		// TODO Auto-generated method stub
 		this.salario += this.salario * 0.2;
 	}
-
 	
 }
