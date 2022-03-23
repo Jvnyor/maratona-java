@@ -1,6 +1,7 @@
 package academy.devdojo.maratonajava.javacore.Sformatacao.test;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Locale;
 
 public class NumberFormatTest02 {
@@ -13,10 +14,18 @@ public class NumberFormatTest02 {
 		nfa[1] = NumberFormat.getCurrencyInstance(localeJP);
 		nfa[2] = NumberFormat.getCurrencyInstance(localeBR);
 		nfa[3] = NumberFormat.getCurrencyInstance(localeIT);
-		double valor = 100_000_000.2130;
+		double valor = 1000.2130;
 		for (NumberFormat numberFormat : nfa) {
 			System.out.println(numberFormat.getMaximumFractionDigits());
 			System.out.println(numberFormat.format(valor));
+		}
+		
+		String valorString = "R$1.000,21";
+		try {
+			System.out.println(nfa[0].parse(valorString));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

@@ -19,7 +19,7 @@ public class NumberFormatTest01 {
 			numberFormat.setMaximumFractionDigits(2);
 			System.out.println(numberFormat.format(valor));
 		}
-		String valorString = "1_000.2130";
+		String valorString = "1000.2130";
 		try {
 			System.out.println(nfa[0].parse(valorString));
 		} catch (ParseException e) {
