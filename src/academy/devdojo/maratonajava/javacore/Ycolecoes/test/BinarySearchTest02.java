@@ -16,14 +16,19 @@ public class BinarySearchTest02 {
 		mangas.add(new Manga(4L, "Pokemon", 3.2));
 		mangas.add(new Manga(3L, "Attack on Titan", 11.20));
 		mangas.add(new Manga(2L, "Dragon Ball Z", 2.99));
+		
 //		Collections.sort(mangas);
 		mangas.sort(new MangaByIdComparator());
+		
 		for (Manga manga : mangas) {
 			System.out.println(manga);
 		}
 		
-		Manga mangaToSearch = new Manga(2L, "Dragon Ball Z", 2.99);
+		Manga mangaToSearch = new Manga(6L, "Dragon Ball Z", 2.99);
+		
 		System.out.println(Collections.binarySearch(mangas, mangaToSearch, mangaByIdComparator));
+		
+//		Arrays.binarySearch();
 	}
 
 }

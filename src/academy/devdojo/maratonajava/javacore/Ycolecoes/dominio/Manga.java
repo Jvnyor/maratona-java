@@ -7,6 +7,7 @@ public class Manga implements Comparable<Manga> {
 	private Long id;
 	private String nome;
 	private double preco;
+	private int quantidade;
 
 	public Manga(Long id, String nome, double preco) {
 		Objects.requireNonNull(id, "Id não pode ser null");
@@ -14,6 +15,11 @@ public class Manga implements Comparable<Manga> {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
+	}
+
+	public Manga(Long id, String nome, double preco, int quantidade) {
+		this(id, nome, preco);
+		this.quantidade = quantidade;
 	}
 
 	public Long getId() {
@@ -40,27 +46,31 @@ public class Manga implements Comparable<Manga> {
 		this.preco = preco;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, nome, preco);
+	public int getQuantidade() {
+		return quantidade;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Manga other = (Manga) obj;
-		return Objects.equals(id, other.id) && Objects.equals(nome, other.nome)
-				&& Double.doubleToLongBits(preco) == Double.doubleToLongBits(other.preco);
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
 	}
+
+
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Manga manga = (Manga) o;
+        return Objects.equals(id, manga.id) && Objects.equals(nome, manga.nome);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome);
+    }
 
 	@Override
 	public String toString() {
-		return "Manga [id=" + id + ", nome=" + nome + ", preco=" + preco + "]";
+		return "Manga [id=" + id + ", nome=" + nome + ", preco=" + preco + ", quantidade=" + quantidade + "]";
 	}
 
 	@Override
@@ -68,7 +78,7 @@ public class Manga implements Comparable<Manga> {
 		// negativo se o this < outroManga
 		// se this == outroManga, return 0
 		// positivo se this > outroManga
-		
+
 //		if (this.id < outroManga.getId()) {
 //			return -1;
 //		} else if (this.id.equals(outroManga.getId())) {
@@ -76,12 +86,12 @@ public class Manga implements Comparable<Manga> {
 //		} else {
 //			return 1;
 //		}
-		
+
 		return this.nome.compareTo(outroManga.getNome());
-				
+
 //		return Double.compare(this.preco, outroManga.getPreco());
 //		return Double.valueOf(this.preco).compareTo(outroManga.getPreco());
-		
+
 //		return this.id.compareTo(outroManga.getId());
 	}
 
