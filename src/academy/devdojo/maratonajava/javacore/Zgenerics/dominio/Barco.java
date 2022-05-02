@@ -3,6 +3,10 @@ package academy.devdojo.maratonajava.javacore.Zgenerics.dominio;
 public class Barco {
 	private String nome;
 
+	public String getNome() {
+		return nome;
+	}
+
 	public Barco(String nome) {
 		this.nome = nome;
 	}
