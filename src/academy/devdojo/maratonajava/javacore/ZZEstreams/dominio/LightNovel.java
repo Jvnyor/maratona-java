@@ -5,6 +5,7 @@ import java.util.Objects;
 public class LightNovel {
 	private String title;
 	private double price;
+	private Category category;
 
 	@Override
 	public int hashCode() {
@@ -28,6 +29,12 @@ public class LightNovel {
 		this.price = price;
 	}
 
+	public LightNovel(String title, double price, Category category) {
+		this.title = title;
+		this.price = price;
+		this.category = category;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -36,8 +43,13 @@ public class LightNovel {
 		return price;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
 	@Override
 	public String toString() {
-		return "LightNovel [title=" + title + ", price=" + price + "]";
+		return "LightNovel [title=" + title + ", price=" + price + ", category=" + category + "]";
 	}
+
 }
