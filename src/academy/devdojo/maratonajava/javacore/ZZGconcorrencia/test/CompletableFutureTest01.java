@@ -45,24 +45,22 @@ public class CompletableFutureTest01 {
 		System.out.printf("Time passed to searchPricesAsyncFuture %dms%n", (end - start));
 		StoreService.shutdown();
 	}
-	
+
 	private static void searchPricesAsyncCompletableFuture(StoreService storeService) {
 		long start = System.currentTimeMillis();
-		CompletableFuture<Double> pricesAsyncCompletableFuture1 = storeService.getPricesAsyncCompletableFuture("Store 1");
-		CompletableFuture<Double> pricesAsyncCompletableFuture2 = storeService.getPricesAsyncCompletableFuture("Store 2");
-		CompletableFuture<Double> pricesAsyncCompletableFuture3 = storeService.getPricesAsyncCompletableFuture("Store 3");
-		CompletableFuture<Double> pricesAsyncCompletableFuture4 = storeService.getPricesAsyncCompletableFuture("Store 4");
-		try {
-			System.out.println(pricesAsyncCompletableFuture1.get());
-			System.out.println(pricesAsyncCompletableFuture2.get());
-			System.out.println(pricesAsyncCompletableFuture3.get());
-			System.out.println(pricesAsyncCompletableFuture4.get());
-		} catch (InterruptedException | ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		CompletableFuture<Double> pricesAsyncCompletableFuture1 = storeService
+				.getPricesAsyncCompletableFuture("Store 1");
+		CompletableFuture<Double> pricesAsyncCompletableFuture2 = storeService
+				.getPricesAsyncCompletableFuture("Store 2");
+		CompletableFuture<Double> pricesAsyncCompletableFuture3 = storeService
+				.getPricesAsyncCompletableFuture("Store 3");
+		CompletableFuture<Double> pricesAsyncCompletableFuture4 = storeService
+				.getPricesAsyncCompletableFuture("Store 4");
+		System.out.println(pricesAsyncCompletableFuture1.join());
+		System.out.println(pricesAsyncCompletableFuture2.join());
+		System.out.println(pricesAsyncCompletableFuture3.join());
+		System.out.println(pricesAsyncCompletableFuture4.join());
 		long end = System.currentTimeMillis();
 		System.out.printf("Time passed to searchPricesAsyncCompletableFuture %dms%n", (end - start));
-		StoreService.shutdown();
 	}
 }
