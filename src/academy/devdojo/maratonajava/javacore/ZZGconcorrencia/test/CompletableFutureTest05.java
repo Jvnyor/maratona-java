@@ -24,7 +24,8 @@ public class CompletableFutureTest05 {
 						store -> System.out.printf("%s finished in %d%n", store, (System.currentTimeMillis() - start))))
 				.toArray(CompletableFuture[]::new);
 
-		CompletableFuture<Void> voidCompletableFuture = CompletableFuture.allOf(completableFutures);
+//		CompletableFuture<Void> voidCompletableFuture = CompletableFuture.allOf(completableFutures);
+		CompletableFuture<Object> voidCompletableFuture = CompletableFuture.anyOf(completableFutures);
 		
 		voidCompletableFuture.join();
 
