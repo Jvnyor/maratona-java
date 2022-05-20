@@ -20,6 +20,22 @@ public class Person {
 				+ email + "]";
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
 	public static final class PersonBuilder {
 
 		private String firstName;
