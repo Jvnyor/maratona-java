@@ -15,7 +15,7 @@ public class ProducerRepository {
 		try (Connection conn = ConnectionFactory.getConnection();
 			 Statement stmt = conn.createStatement();) {
 			int rowsAffected = stmt.executeUpdate(sql);
-			log.info("Database rows affected {}", rowsAffected);
+			log.info("Inserted producer in the database, rows affected '{}'", rowsAffected);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
