@@ -1,6 +1,7 @@
 package academy.devdojo.maratonajava.javacore.ZZIjdbc.repository;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -81,13 +82,12 @@ public class ProducerRepository {
 	}
 
 	public static void showProducerMetaData() {
-		log.info("Showing Producer Metadata");
+		log.info("Showing Producer MetaData");
 		String sql = "SELECT * FROM anime_store.producer";
 		try (Connection conn = ConnectionFactory.getConnection();
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(sql);) {
 			ResultSetMetaData rsMetaData = rs.getMetaData();
-			rs.next();
 			int columnCount = rsMetaData.getColumnCount();
 			log.info("Columns count '{}'", columnCount);
 			for (int i = 1; i <= columnCount; i++) {
@@ -95,6 +95,33 @@ public class ProducerRepository {
 				log.info("Column name '{}'", rsMetaData.getColumnName(i));
 				log.info("Column size '{}'", rsMetaData.getColumnDisplaySize(i));
 				log.info("Column size '{}'", rsMetaData.getColumnTypeName(i));
+			}
+		} catch (SQLException e) {
+			log.error("Error while trying to update producer", e);
+		}
+	}
+
+	public static void showDriverMetaData() {
+		log.info("Showing Driver MetaData");
+		try (Connection conn = ConnectionFactory.getConnection();) {
+			DatabaseMetaData dbMetaData = conn.getMetaData();
+			if (dbMetaData.supportsResultSetType(ResultSet.TYPE_FORWARD_ONLY)) {
+				log.info("Supports TYPE_FORWARD_ONLY");
+				if (dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)) {
+					log.info("And supports CONCUR_UPDATABLE");
+				}
+			}
+			if (dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE)) {
+				log.info("Supports TYPE_SCROLL_INSENSITIVE");
+				if (dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+					log.info("And supports CONCUR_UPDATABLE");
+				}
+			}
+			if (dbMetaData.supportsResultSetType(ResultSet.TYPE_SCROLL_SENSITIVE)) {
+				log.info("Supports TYPE_SCROLL_SENSITIVE");
+				if (dbMetaData.supportsResultSetConcurrency(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE)) {
+					log.info("And supports CONCUR_UPDATABLE");
+				}
 			}
 		} catch (SQLException e) {
 			log.error("Error while trying to update producer", e);
