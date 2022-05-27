@@ -18,7 +18,13 @@ public class ConnectionFactoryTest01 {
 //		List<Producer> producers = ProducerService.findByName("Mad");
 //		log.info("Producers found '{}'", producers);
 //		ProducerService.showProducerMetaData();
-		ProducerService.showDriverMetaData();
+//		ProducerService.showDriverMetaData();
+//		ProducerService.showTypeScrollWorking();
+//		List<Producer> producers = ProducerService.findByNameAndUpdateToUpperCase("Deen");
+//		List<Producer> producers = ProducerService.findByNameAndInsertWhenNotFound("A-1 pictures");
+//		ProducerService.findByNameAndDelete("A-1 pictures");
+		List<Producer> producers = ProducerService.findByNamePreparedStatement("B or X'='X");
+		log.info("Producers found '{}'", producers);
 //		log.info("info");
 //		log.debug("debug");
 //		log.warn("warn");
