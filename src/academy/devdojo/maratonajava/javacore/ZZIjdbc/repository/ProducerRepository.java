@@ -1,5 +1,6 @@
 package academy.devdojo.maratonajava.javacore.ZZIjdbc.repository;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
@@ -114,6 +115,29 @@ public class ProducerRepository {
 			log.error("Error while trying to update producer", e);
 		}
 		return producers;
+	}
+
+	public static List<Producer> findByNameCallableStatement(String name) {
+		log.info("Finding Producers by name");
+		List<Producer> producers = new ArrayList<>();
+		try (Connection conn = ConnectionFactory.getConnection();
+				CallableStatement cs = callableStatementFindByName(conn, name);
+				ResultSet rs = cs.executeQuery();) {
+			while (rs.next()) {
+				Producer producer = Producer.builder().id(rs.getInt("id")).name(rs.getString("name")).build();
+				producers.add(producer);
+			}
+		} catch (SQLException e) {
+			log.error("Error while trying to update producer", e);
+		}
+		return producers;
+	}
+
+	private static CallableStatement callableStatementFindByName(Connection conn, String name) throws SQLException {
+		String sql = "CALL `anime_store`.`sp_get_producer_by_name`(?);";
+		CallableStatement cs = conn.prepareCall(sql);
+		cs.setString(1, String.format("%%%s%%", name));
+		return cs;
 	}
 
 	private static PreparedStatement preparedStatementFindByName(Connection conn, String name) throws SQLException {
