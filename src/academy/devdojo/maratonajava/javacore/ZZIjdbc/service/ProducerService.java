@@ -10,6 +10,10 @@ public class ProducerService {
 		ProducerRepository.save(producer);
 	}
 
+	public static void saveTransactional(List<Producer> producers) {
+		ProducerRepository.saveTransactional(producers);
+	}
+
 	public static void delete(Integer id) {
 		requiredValidId(id);
 		ProducerRepository.delete(id);
@@ -65,6 +69,7 @@ public class ProducerService {
 		ProducerRepository.findByNameAndDelete(name);
 	}
 
+	@SuppressWarnings("null")
 	private static void requiredValidId(Integer id) {
 		if (id == null && id <= 0) {
 			throw new IllegalArgumentException("Invalid value for id");
