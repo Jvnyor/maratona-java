@@ -6,7 +6,6 @@ import java.util.Scanner;
 import academy.devdojo.maratonajava.javacore.ZZJcrud.dominio.Anime;
 import academy.devdojo.maratonajava.javacore.ZZJcrud.dominio.Producer;
 import academy.devdojo.maratonajava.javacore.ZZJcrud.repository.AnimeRepository;
-import academy.devdojo.maratonajava.javacore.ZZJcrud.repository.ProducerRepository;
 
 public class AnimeService {
 
@@ -18,7 +17,6 @@ public class AnimeService {
 		case 2 -> delete();
 		case 3 -> save();
 		case 4 -> update();
-		default -> throw new IllegalArgumentException("Not a valid option");
 		}
 	}
 
@@ -26,7 +24,7 @@ public class AnimeService {
 		System.out.println("Type the name or empty to all");
 		String name = SCANNER.nextLine();
 		AnimeRepository.findByName(name)
-				.forEach(a -> System.out.printf("[%d] - %s - %d%n", a.getId(), a.getName(), a.getEpisodes()));
+				.forEach(a -> System.out.printf("[%d] - %s %d %s%n", a.getId(), a.getName(), a.getEpisodes(), a.getProducer().getName()));
 	}
 
 	private static void delete() {
@@ -43,7 +41,7 @@ public class AnimeService {
 		System.out.println("Type the name of the anime");
 		String name = SCANNER.nextLine();
 		System.out.println("Type the number of episodes");
-		Integer episodes = Integer.parseInt(SCANNER.nextLine());
+		int episodes = Integer.parseInt(SCANNER.nextLine());
 		System.out.println("Type the id of the producer");
 		Integer producerId = Integer.parseInt(SCANNER.nextLine());
 		AnimeRepository.save(Anime.builder()
@@ -63,11 +61,15 @@ public class AnimeService {
 		System.out.println("Anime found " + animeFromDB);
 		System.out.println("Type the new name or enter to keep the same");
 		String name = SCANNER.nextLine();
-		System.out.println("Type the number of episodes or enter to keep the same");
-		Integer episodes = Integer.parseInt(SCANNER.nextLine());
+		System.out.println("Type the number of episodes");
+		int episodes = Integer.parseInt(SCANNER.nextLine());
 		name = name.isEmpty() ? animeFromDB.getName() : name;
-		episodes = episodes == null ? animeFromDB.getEpisodes() : episodes;
-		Anime animeToUpdate = Anime.builder().id(animeFromDB.getId()).name(name).episodes(episodes).build();
+		Anime animeToUpdate = Anime.builder()
+				.id(animeFromDB.getId())
+				.name(name)
+				.episodes(episodes)
+				.producer(animeFromDB.getProducer())
+				.build();
 		AnimeRepository.update(animeToUpdate);
 	}
 }

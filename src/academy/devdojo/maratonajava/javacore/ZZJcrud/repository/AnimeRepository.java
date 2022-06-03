@@ -126,11 +126,11 @@ public class AnimeRepository {
 	}
 
 	private static PreparedStatement createPreparedStatementUpdate(Connection conn, Anime anime) throws SQLException {
-		String sql = "UPDATE `anime_store`.`anime` SET `name` = ?, episodes = ?  WHERE (`id` = ?);";
+		String sql = "UPDATE `anime_store`.`anime` SET `name` = ?, `episodes` = ? WHERE (`id` = ?);";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, anime.getName());
 		ps.setInt(2, anime.getEpisodes());
-		ps.setInt(4, anime.getId());
+		ps.setInt(3, anime.getId());
 		return ps;
 	}
 }
